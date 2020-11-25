@@ -1,8 +1,7 @@
 package com.jasonkst.daggerexample.di
 
-import com.jasonkst.daggerexample.AuthActivity
+import com.jasonkst.daggerexample.ui.auth.AuthActivity
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 @Module

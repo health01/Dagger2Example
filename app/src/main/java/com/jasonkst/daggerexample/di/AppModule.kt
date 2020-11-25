@@ -2,7 +2,6 @@ package com.jasonkst.daggerexample.di
 
 import android.app.Application
 import android.graphics.drawable.Drawable
-import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -10,16 +9,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.jasonkst.daggerexample.R
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 object AppModule {
-
-
-    @Provides
-    fun getApp(application: Application?): Boolean {
-        return application == null
-    }
-
+    @Singleton
     @Provides
     fun provideRequestOptions(): RequestOptions {
         return RequestOptions
@@ -27,6 +21,7 @@ object AppModule {
             .error(R.drawable.white_background)
     }
 
+    @Singleton
     @Provides
     fun provideGlideInstance(
         application: Application,
@@ -36,6 +31,7 @@ object AppModule {
             .setDefaultRequestOptions(requestOptions)
     }
 
+    @Singleton
     @Provides
     fun provideAppDrawable(application: Application): Drawable {
         return application.let { ContextCompat.getDrawable(it, R.drawable.logo)!! }
