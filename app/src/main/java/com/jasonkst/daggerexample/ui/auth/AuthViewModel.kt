@@ -1,9 +1,16 @@
 package com.jasonkst.daggerexample.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel @Inject constructor() : ViewModel() {
     companion object {
-        private val TAG = "AuthViewModel"
+        private const val TAG = "AuthViewModel"
+    }
+
+    init {
+        Log.d(TAG, "AuthViewModel: viewmodel is working...")
     }
 }
+
