@@ -1,17 +1,28 @@
 package com.jasonkst.daggerexample
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import com.bumptech.glide.RequestManager
 import dagger.android.DaggerActivity
 import javax.inject.Inject
 
 class AuthActivity : DaggerActivity() {
-    private val TAG = "AuthActivity"
 
     @Inject
-    lateinit var defaultString: String
+    lateinit var logo: Drawable
+
+    @Inject
+    lateinit var requestManager: RequestManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setContentView(R.layout.activity_auth)
         super.onCreate(savedInstanceState)
-        println(TAG + defaultString)
+        setLogo()
     }
 
+    private fun setLogo() {
+        requestManager
+            .load(logo)
+            .into(findViewById(R.id.login_logo))
+    }
 }
