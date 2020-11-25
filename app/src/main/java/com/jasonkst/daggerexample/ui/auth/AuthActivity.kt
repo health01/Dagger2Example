@@ -1,8 +1,9 @@
-package com.jasonkst.daggerexample
+package com.jasonkst.daggerexample.ui.auth
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import com.bumptech.glide.RequestManager
+import com.jasonkst.daggerexample.R
 import dagger.android.DaggerActivity
 import javax.inject.Inject
 
