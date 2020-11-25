@@ -7,6 +7,14 @@ import dagger.Module
 
 @Module
 abstract class ViewModelFactoryModule {
+
     @Binds
-    abstract fun bindViewModelFactory(viewModelFactory: ViewModelProviderFactory?): ViewModelProvider.Factory?
+    abstract fun bindViewModelFactory(viewModelFactory: ViewModelProviderFactory): ViewModelProvider.Factory
+
+/*    Same way as above
+    companion object{
+        fun bindViewModelFactory(viewModelFactory: ViewModelProviderFactory): ViewModelProvider.Factory {
+            return viewModelFactory
+        }
+    }*/
 }
