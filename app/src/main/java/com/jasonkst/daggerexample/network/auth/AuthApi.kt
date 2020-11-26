@@ -1,10 +1,13 @@
 package com.jasonkst.daggerexample.network.auth
 
-import okhttp3.ResponseBody
-import retrofit2.Call
+import com.jasonkst.daggerexample.models.User
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Observer
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface AuthApi {
-    @get:GET("fake")
-    val getFakeStuff: Call<ResponseBody?>?
+    @GET("users/{id}")
+    fun getUser(@Path("id") id: Int): Observable<User?>?
 }
