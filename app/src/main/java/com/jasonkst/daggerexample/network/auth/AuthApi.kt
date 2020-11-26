@@ -9,5 +9,5 @@ import retrofit2.http.Path
 
 interface AuthApi {
     @GET("users/{id}")
-    fun getUser(@Path("id") id: Int): Observable<User?>?
+    fun getUser(@Path("id") id: Int): Flowable<User>
 }
