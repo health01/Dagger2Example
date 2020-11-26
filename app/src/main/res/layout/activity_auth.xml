@@ -28,15 +28,17 @@
         android:id="@+id/user_id_input"
         android:layout_marginTop="20dp"/>
 
-    <Button
-        app:layout_constraintTop_toBottomOf="@+id/user_id_input"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login_button"
         android:layout_marginTop="15dp"
-        android:text="Login"/>
+        android:onClick="onClick"
+        android:text="Login"
+        android:clickable="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_id_input" />
 
     <ProgressBar
         app:layout_constraintTop_toTopOf="parent"
