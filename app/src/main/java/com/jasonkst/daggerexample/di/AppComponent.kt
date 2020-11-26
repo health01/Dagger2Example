@@ -18,6 +18,8 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
+    fun authSubcomponent(): ActivityBuildersModule.AuthActivitySubcomponent.Factory
+
     @Component.Builder
     interface Builder {
         @BindsInstance
