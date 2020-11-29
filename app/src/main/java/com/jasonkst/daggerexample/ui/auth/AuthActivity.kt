@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.jasonkst.daggerexample.R
@@ -36,10 +36,35 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
         subscribeObservers()
     }
 
-    fun subscribeObservers() {
-        authViewModel.authUser.observe(this, Observer { user ->
-            Log.d(TAG, "onChanged: $user")
-        })
+    private fun subscribeObservers() {
+        authViewModel.observeUser().observe(this,
+            { userAuthResource ->
+                userAuthResource?.apply {
+                    when (this) {
+                        is AuthResource.Loading -> showProgressBar(true)
+
+                        is AuthResource.Authenticated -> {
+                            showProgressBar(false)
+                            Log.d(
+                                TAG,
+                                "onChanged: LOGIN SUCCESS: " + userAuthResource.data?.toString()
+                            )
+                        }
+
+                        is AuthResource.Error -> {
+                            Log.e(TAG, "onChanged: " + userAuthResource.message)
+                            showProgressBar(false)
+                            Toast.makeText(
+                                this@AuthActivity,
+                                """${userAuthResource.message.toString()}  Did you enter a number between 0 and 10?   """.trimIndent(),
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                        }
+                        else -> showProgressBar(false)
+                    }
+                }
+            })
     }
 
     private fun setLogo() {
@@ -53,6 +78,14 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
             return
         }
         authViewModel.authenticateWithId(Integer.parseInt(user_id_input.text.toString()))
+    }
+
+    private fun showProgressBar(isVisible: Boolean) {
+        if (isVisible) {
+            progress_bar.visibility = View.VISIBLE
+        } else {
+            progress_bar.visibility = View.GONE
+        }
     }
 
     override fun onClick(view: View) {
