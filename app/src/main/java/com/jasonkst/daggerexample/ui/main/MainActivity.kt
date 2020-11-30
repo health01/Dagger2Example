@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.jasonkst.daggerexample.BaseActivity
 import com.jasonkst.daggerexample.R
+import com.jasonkst.daggerexample.ui.main.profile.ProfileFragment
 
 class MainActivity : BaseActivity() {
     private val TAG = "MainActivity"
@@ -17,9 +18,16 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, TAG, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        testFragment()
+    }
+
+    private fun testFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, ProfileFragment())
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
