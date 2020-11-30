@@ -1,5 +1,6 @@
 package com.jasonkst.daggerexample.ui.auth
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.jasonkst.daggerexample.R
+import com.jasonkst.daggerexample.ui.main.MainActivity
 import com.jasonkst.daggerexample.viewModels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_auth.*
@@ -37,7 +39,7 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
     }
 
     private fun subscribeObservers() {
-        authViewModel.observeUser().observe(this,
+        authViewModel.observeAuthState().observe(this,
             { userAuthResource ->
                 userAuthResource?.apply {
                     when (this) {
@@ -49,6 +51,7 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
                                 TAG,
                                 "onChanged: LOGIN SUCCESS: " + userAuthResource.data?.toString()
                             )
+                            onLoginSuccess()
                         }
 
                         is AuthResource.Error -> {
@@ -86,6 +89,13 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
         } else {
             progress_bar.visibility = View.GONE
         }
+    }
+
+    private fun onLoginSuccess() {
+        Log.d(TAG, "onLoginSuccess: login successful!")
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onClick(view: View) {
