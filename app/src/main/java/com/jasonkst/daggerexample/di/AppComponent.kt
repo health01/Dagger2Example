@@ -2,6 +2,7 @@ package com.jasonkst.daggerexample.di
 
 import android.app.Application
 import com.jasonkst.daggerexample.BaseApplication
+import com.jasonkst.daggerexample.SessionManager
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -19,6 +20,8 @@ import javax.inject.Singleton
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
 //    fun authSubcomponent(): ActivityBuildersModule.AuthActivitySubcomponent.Factory
+
+    fun sessionManager(): SessionManager
 
     @Component.Builder
     interface Builder {
