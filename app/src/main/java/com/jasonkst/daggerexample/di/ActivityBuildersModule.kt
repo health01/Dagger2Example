@@ -2,6 +2,7 @@ package com.jasonkst.daggerexample.di
 
 import com.jasonkst.daggerexample.di.auth.AuthModule
 import com.jasonkst.daggerexample.di.auth.AuthViewModelsModule
+import com.jasonkst.daggerexample.di.main.MainFragmentBuildersModule
 import com.jasonkst.daggerexample.ui.auth.AuthActivity
 import com.jasonkst.daggerexample.ui.main.MainActivity
 import dagger.Module
@@ -13,7 +14,7 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector(modules = [AuthViewModelsModule::class, AuthModule::class])
     abstract fun contributeAuthActivity(): AuthActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainFragmentBuildersModule::class])
     abstract fun contributeMainActivity(): MainActivity
     /*  @Binds
       @IntoMap

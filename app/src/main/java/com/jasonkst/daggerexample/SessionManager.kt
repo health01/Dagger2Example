@@ -16,6 +16,7 @@ class SessionManager @Inject constructor() {
         MediatorLiveData<AuthResource<User>>()
 
     fun authenticateWithId(source: LiveData<AuthResource<User>>) {
+        cachedUser.value = AuthResource.Loading()
         cachedUser.addSource(source) { it ->
             cachedUser.apply {
                 value = it
