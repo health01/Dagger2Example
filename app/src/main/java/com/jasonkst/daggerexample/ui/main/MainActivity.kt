@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.jasonkst.daggerexample.BaseActivity
 import com.jasonkst.daggerexample.R
+import com.jasonkst.daggerexample.ui.main.posts.PostsFragment
 import com.jasonkst.daggerexample.ui.main.profile.ProfileFragment
 
 class MainActivity : BaseActivity() {
@@ -26,7 +27,7 @@ class MainActivity : BaseActivity() {
 
     private fun testFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, ProfileFragment())
+            .replace(R.id.main_container, PostsFragment())
             .commit()
     }
 
