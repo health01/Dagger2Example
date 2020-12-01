@@ -4,15 +4,19 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("id") @Expose
+    @SerializedName("id")
+    @Expose
     var id: Int? = 0,
 
-    @SerializedName("username") @Expose
+    @SerializedName("username")
+    @Expose
     var username: String? = null,
 
-    @SerializedName("email") @Expose
+    @SerializedName("email")
+    @Expose
     var email: String? = null,
 
-    @SerializedName("website") @Expose
+    @SerializedName("website")
+    @Expose
     var website: String? = null
 )
