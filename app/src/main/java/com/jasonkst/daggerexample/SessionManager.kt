@@ -6,8 +6,9 @@ import androidx.lifecycle.MediatorLiveData
 import com.jasonkst.daggerexample.models.User
 import com.jasonkst.daggerexample.ui.auth.AuthResource
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
+@Singleton
 class SessionManager @Inject constructor() {
     private val TAG = "DaggerExample"
 
