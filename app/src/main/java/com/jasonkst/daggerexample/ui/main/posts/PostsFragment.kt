@@ -1,6 +1,7 @@
 package com.jasonkst.daggerexample.ui.main.posts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,5 +32,15 @@ class PostsFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, providerFactory).get(PostsViewModel::class.java)
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+        viewModel.observePosts().apply {
+            removeObservers(viewLifecycleOwner)
+            observe(viewLifecycleOwner, {
+                Log.d(TAG, "onChanged: " + it.data)
+            })
+        }
     }
 }

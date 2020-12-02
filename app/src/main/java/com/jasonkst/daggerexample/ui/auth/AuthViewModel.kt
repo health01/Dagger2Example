@@ -28,8 +28,10 @@ class AuthViewModel @Inject constructor(
         return LiveDataReactiveStreams.fromPublisher(
             authApi.getUser(userId)
                 .onErrorReturn {
-                    User().apply { id = -1 }
-                }.subscribeOn(Schedulers.io())
+                    val errorUser = User()
+                    errorUser.id = -1
+                    errorUser
+                }
                 // wrap User object in AuthResource
                 .map { user ->
                     if (user.id == -1) {
