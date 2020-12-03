@@ -5,10 +5,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.jasonkst.daggerexample.BaseActivity
 import com.jasonkst.daggerexample.R
-import com.jasonkst.daggerexample.ui.main.posts.PostsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -19,16 +20,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        // 將drawerLayout和toolbar整合，會出現「三」按鈕
-        testFragment()
         setToolBar()
-        nav_view.setNavigationItemSelectedListener(this)
+        init()
     }
 
-    private fun testFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, PostsFragment())
-            .commit()
+    private fun init() {
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
+        NavigationUI.setupWithNavController(nav_view, navController)
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
     private fun setToolBar() {
@@ -67,11 +67,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
-                println(TAG)
+                Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.profileScreen)
             }
 
             R.id.nav_posts -> {
-                println(TAG)
+                Navigation.findNavController(this, R.id.nav_host_fragment)
+                    .navigate(R.id.postsScreen)
             }
         }
         //close navigation drawer
