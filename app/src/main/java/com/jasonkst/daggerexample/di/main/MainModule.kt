@@ -10,12 +10,15 @@ import retrofit2.Retrofit
 
 @Module
 object MainModule {
+    @MainScope
     @Provides
     fun provideSessionApi(retrofit: Retrofit): MainApi = retrofit.create(MainApi::class.java)
 
+    @MainScope
     @Provides
     fun provideAdapter(): PostRecyclerAdapter = PostRecyclerAdapter()
 
+    @MainScope
     @Provides
     fun provideLinearLayoutManager(application: Application,): LinearLayoutManager = LinearLayoutManager(application)
 }

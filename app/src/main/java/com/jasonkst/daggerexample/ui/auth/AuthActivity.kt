@@ -10,11 +10,13 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.jasonkst.daggerexample.R
+import com.jasonkst.daggerexample.models.User
 import com.jasonkst.daggerexample.ui.main.MainActivity
 import com.jasonkst.daggerexample.viewModels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
+import javax.inject.Named
 
 class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
     private val TAG = "AuthActivity"
@@ -29,6 +31,14 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
     @Inject
     lateinit var requestManager: RequestManager
 
+    @Inject
+    @Named("app_user")
+    lateinit var userNumber1: User
+
+    @Inject
+    @Named("auth_user")
+    lateinit var userNumber2: User
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +46,10 @@ class AuthActivity : DaggerAppCompatActivity(), View.OnClickListener {
         authViewModel = ViewModelProvider(this, providerFactory).get(AuthViewModel::class.java)
         setLogo()
         subscribeObservers()
+
+
+        Log.d(TAG, "onCreate: ${ Integer.toHexString(System.identityHashCode(userNumber1))}")
+        Log.d(TAG, "onCreate: ${ Integer.toHexString(System.identityHashCode(userNumber2))}")
     }
 
     private fun subscribeObservers() {
