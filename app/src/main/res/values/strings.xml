@@ -12,5 +12,6 @@
 
     <string name="posts">Posts</string>
     <string name="profile">Profile</string>
-
+    <string name="fragment_profile">Profile</string>
+    <string name="fragment_posts">Posts</string>
 </resources>
