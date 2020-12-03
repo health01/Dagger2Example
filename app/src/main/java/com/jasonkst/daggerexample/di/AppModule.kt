@@ -7,12 +7,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.jasonkst.daggerexample.R
+import com.jasonkst.daggerexample.models.User
 import com.jasonkst.daggerexample.util.Constants
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -46,5 +48,12 @@ object AppModule {
     @Provides
     fun provideAppDrawable(application: Application): Drawable {
         return application.let { ContextCompat.getDrawable(it, R.drawable.logo)!! }
+    }
+
+    @Singleton
+    @Provides
+    @Named("app_user")
+    fun someUser(): User {
+        return User()
     }
 }
