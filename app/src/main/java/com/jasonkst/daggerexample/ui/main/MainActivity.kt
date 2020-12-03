@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
@@ -43,6 +44,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
     }
 
+    fun isValidDestination(destination: Int): Boolean {
+        return destination != Navigation.findNavController(
+            this,
+            R.id.nav_host_fragment
+        ).currentDestination!!
+            .id
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -67,13 +76,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
+                // nav options to clear backstack
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, true)
+                    .build()
+
                 Navigation.findNavController(this, R.id.nav_host_fragment)
-                    .navigate(R.id.profileScreen)
+                    .navigate(R.id.profileScreen, null, navOptions)
             }
 
             R.id.nav_posts -> {
-                Navigation.findNavController(this, R.id.nav_host_fragment)
-                    .navigate(R.id.postsScreen)
+                if (isValidDestination(R.id.postsScreen)) {
+
+                    Navigation.findNavController(this, R.id.nav_host_fragment)
+                        .navigate(R.id.postsScreen)
+                }
             }
         }
         //close navigation drawer
