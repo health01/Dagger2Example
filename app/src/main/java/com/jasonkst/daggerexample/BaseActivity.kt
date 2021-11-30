@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import com.jasonkst.daggerexample.ui.auth.AuthActivity
 import com.jasonkst.daggerexample.ui.auth.AuthResource
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes;
+
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -17,6 +21,11 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeObservers()
+
+        AppCenter.start(
+            application, "8f65b5a6-2fc3-43c5-b68f-f109475479d6",
+            Analytics::class.java, Crashes::class.java
+        )
     }
 
     private fun subscribeObservers() {
