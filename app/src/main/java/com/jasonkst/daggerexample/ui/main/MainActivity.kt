@@ -11,6 +11,8 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.jasonkst.daggerexample.BaseActivity
 import com.jasonkst.daggerexample.R
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -23,6 +25,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setSupportActionBar(toolbar)
         setToolBar()
         init()
+
+//        Crashes.generateTestCrash()
     }
 
     private fun init() {

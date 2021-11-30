@@ -11,6 +11,7 @@ import com.jasonkst.daggerexample.R
 import com.jasonkst.daggerexample.models.User
 import com.jasonkst.daggerexample.ui.auth.AuthResource
 import com.jasonkst.daggerexample.viewModels.ViewModelProviderFactory
+import com.microsoft.appcenter.analytics.Analytics
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
@@ -51,6 +52,13 @@ class ProfileFragment : DaggerFragment() {
                                         "Authenticated as: " + it.email
                             )
                             setUserDetails(it)
+
+
+                            val list: HashMap<String, String> = HashMap<String, String>()
+                            list["email"] = it.email.toString()
+                            list["username"] = it.username.toString()
+                            list["website"] = it.website.toString()
+                            Analytics.trackEvent(TAG, list)
                         }
 
                     }

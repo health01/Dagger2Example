@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import com.jasonkst.daggerexample.ui.auth.AuthActivity
 import com.jasonkst.daggerexample.ui.auth.AuthResource
+import com.microsoft.appcenter.crashes.Crashes
 
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -18,8 +19,6 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeObservers()
-
-
     }
 
     private fun subscribeObservers() {
