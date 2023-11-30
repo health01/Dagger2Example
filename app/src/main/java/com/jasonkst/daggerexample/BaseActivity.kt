@@ -23,8 +23,10 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         subscribeObservers()
 
         AppCenter.start(
-            application, "8f65b5a6-2fc3-43c5-b68f-f109475479d6",
-            Analytics::class.java, Crashes::class.java
+            application,
+            "8f65b5a6-2fc3-43c5-b68f-f109475479d6",
+            Analytics::class.java,
+            Crashes::class.java
         )
     }
 
@@ -32,16 +34,14 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         sessionManager.getAuthUser().observe(this, {
             when (it) {
                 is AuthResource.Loading -> Log.d(
-                    TAG,
-                    "onChanged: BaseActivity: LOADING..."
+                    TAG, "onChanged: BaseActivity: LOADING..."
                 )
 
 
-                is AuthResource.Authenticated ->
-                    Log.d(
-                        TAG,
-                        "onChanged: BaseActivity: AUTHENTICATED... " + "Authenticated as: " + it.data?.email.toString()
-                    )
+                is AuthResource.Authenticated -> Log.d(
+                    TAG,
+                    "onChanged: BaseActivity: AUTHENTICATED... " + "Authenticated as: " + it.data?.email.toString()
+                )
 
 
                 is AuthResource.Error -> Log.d(TAG, "onChanged: BaseActivity: ERROR...")
