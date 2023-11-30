@@ -24,7 +24,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
         AppCenter.start(
             application,
-            "8f65b5a6-2fc3-43c5-b68f-f109475479d6",
+            "d1e3743c-8c42-47a4-9abe-22307dc530bd",
             Analytics::class.java,
             Crashes::class.java
         )
